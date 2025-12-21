@@ -11,10 +11,7 @@ from model import load_model, load_class_names
 from utils import preprocess_image
 from gradcam import GradCAM
 
-
-# =========================================================
-#   🔽 ADDED CODE — Hugging Face model download (ONLY ADDITION)
-# =========================================================
+# Hugging Face model download
 MODEL_URL = "https://huggingface.co/Nadia74/inception_best.pth/resolve/main/inception_best.pth"
 MODEL_PATH = "models/inception_best.pth"
 
@@ -22,8 +19,7 @@ if not os.path.exists(MODEL_PATH):
     os.makedirs("models", exist_ok=True)
     st.info("Downloading model… please wait ⏳")
     urllib.request.urlretrieve(MODEL_URL, MODEL_PATH)
-# =========================================================
-
+    
 
 # ------------------ Page setup ------------------
 st.set_page_config(
@@ -50,9 +46,9 @@ def load_resources():
 
 model, class_names, gradcam = load_resources()
 
-# =========================================================
-#                   UPLOAD IMAGE MODE
-# =========================================================
+
+# UPLOAD IMAGE MODE
+
 if mode == "Upload Image":
     uploaded_file = st.file_uploader(
         "Upload an image",
@@ -93,9 +89,8 @@ if mode == "Upload Image":
         st.subheader("🔥 Grad-CAM Visualization")
         st.image(overlay.astype(np.uint8), use_column_width=True)
 
-# =========================================================
-#                   WEBCAM BONUS MODE
-# =========================================================
+#  WEBCAM BONUS MODE
+ 
 elif mode == "Use Webcam":
     st.subheader("📷 Webcam Capture")
     st.info("Allow camera access when prompted.")
