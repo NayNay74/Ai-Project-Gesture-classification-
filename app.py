@@ -4,9 +4,26 @@ import numpy as np
 import cv2
 from PIL import Image
 
+import os
+import urllib.request
+
 from model import load_model, load_class_names
 from utils import preprocess_image
 from gradcam import GradCAM
+
+
+# =========================================================
+#   🔽 ADDED CODE — Hugging Face model download (ONLY ADDITION)
+# =========================================================
+MODEL_URL = "https://huggingface.co/Nadia74/inception_best.pth/resolve/main/inception_best.pth"
+MODEL_PATH = "models/inception_best.pth"
+
+if not os.path.exists(MODEL_PATH):
+    os.makedirs("models", exist_ok=True)
+    st.info("Downloading model… please wait ⏳")
+    urllib.request.urlretrieve(MODEL_URL, MODEL_PATH)
+# =========================================================
+
 
 # ------------------ Page setup ------------------
 st.set_page_config(
